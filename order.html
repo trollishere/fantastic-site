@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fantastic Shop - Place Order</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0e0e10;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    form {
+      max-width: 500px;
+      margin: auto;
+      background: #1f1f1f;
+      padding: 30px;
+      border-radius: 10px;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: none;
+    }
+    button {
+      background-color: #5865F2;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Place an Order</h1>
+  <form id="orderForm">
+    <input type="text" name="username" placeholder="Your Discord Username" required />
+    <select name="product" required>
+      <option value="">Choose a Product</option>
+      <option value="Thumbnail">Thumbnail</option>
+      <option value="Template">Template</option>
+      <option value="Discord Server">Discord Server</option>
+      <option value="Discord Server">minecraft Server</option>
+	  <option value="Discord Server">VPS</option>
+	 </select>
+    <textarea name="details" placeholder="Order Details (e.g. theme, colors)" required></textarea>
+    <button type="submit">Submit Order</button>
+  </form>
+
+  <script>
+    document.getElementById("orderForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const data = {
+        username: this.username.value,
+        product: this.product.value,
+        details: this.details.value,
+        time: new Date().toLocaleString(),
+      };
+      let orders = JSON.parse(localStorage.getItem("orders") || "[]");
+      orders.push(data);
+      localStorage.setItem("orders", JSON.stringify(orders));
+      alert("Order submitted!");
+      this.reset();
+    });
+  </script>
+</body>
+</html>
